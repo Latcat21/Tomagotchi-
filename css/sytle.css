@@ -1,0 +1,33 @@
+html{
+  margin: 0;
+  padding: 0;
+}
+.tom-wrapper{
+ 
+  
+  
+}
+
+
+.main-tom{
+  background-color: black;
+  height: 500px;
+  width: 400px;
+  border-radius: 35%;
+  position: relative;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.7);
+}
+.display{
+  background-color: #d3d3d3;
+  border-radius: 35%;
+  height: 200px;
+  width: 250px;
+  left: 20%;
+  top: 20%;
+  position: absolute;
+}
+.interaction-btn{
+  position: absolute;
+  top: 65%;
+  left: 33%;
+}
