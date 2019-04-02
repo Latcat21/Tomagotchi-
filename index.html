@@ -5,20 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Page Title</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+
   <link rel="stylesheet" type="text/css" media="screen" href="css/sytle.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
   <div class="tom-wrapper">
-    <div class="heading">
-      <h1>Tomagotchi</h1>
-    
-    <div class="tom-name">
-      <h2>Please name your Tomagotchi</h2>
-        <input type="text" placeholder="enter name" id="tom-name">
-      <button class="button" type="submit">submit</button>
-    </div>
-    </div>
+    <div class="section group">
+   <div class="col span_1_of_2">
     <div class="main-tom">
       <div class="display">
 
@@ -28,15 +23,34 @@
           <button class="btn play" id="play" value='play'>play</button>
           <button class="btn lights" id="lights" value='lights'>lights</button>
       </div>
+      </div>
 
     </div>
-
+    <div class="col span_1_of_2">
+    <div class="heading">
+        <h1>Tomagotchi</h1>
+      
+      <div class="tom-name">
+        <h2>Please name your Tomagotchi</h2>
+        <input type="text" placeholder="enter name" id="tom-name">
+        <button class="button" type="submit">submit</button>
+        
+      </div>
+      </div>
+      <div class="metrics">
+          <p class="age">Age: 0</p>
+          <p class="boredom">Boredrom:<span class="boredom"> 0</span></p>
+          <p class="hunger">Hunger: 0</p>
+          <p class="sleepiness">Sleepiness: 0</p>
+      </div>
+      </div>
 
 
 
 
   </div>
+  </div>
+  <script src="js/app.js"></script>
   
 </body>
-<script src="js/app.js"></script>
 </html>

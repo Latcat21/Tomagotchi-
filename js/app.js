@@ -31,55 +31,109 @@ Animate your pet across the screen while it's alive.
 
 */
 
-class Tomagotchi {
+/*
+Questions...
+can't find mistake..
+
+
+
+
+*/
+
+class tomagotchi {
   constructor(name){
-    this.hunger = 0;
+    this.hunger = 10;
     this.name = name;
-    this.sleepiness = 0,
-    this.borddom = 0,
+    this.sleepiness = 10,
+    this.boredom = 10,
     this.alive = true,
-    this.time = 20
+    this.age = 0
+  }
+  feeder(){
+    if($clicked.hasClass('feed')){
+      console.log('you clicked feed')
+    }
+     
+    
+
+  }
+
+  happiness(){
+
+  }
+
+  fatigue(){
+
   }
 }
 
 
-
+const myPet = new tomagotchi()
 
 const game = {
-  timeRemaining: 30,
   created: false,
   timerHandle: null,
+  timeRemaining: 3,
+  currentPet: null,
+  timer: 0,
 
-  start($clicked){
-    console.log('started')
-   }
+  startTimer(){
+    console.log('this.startTimer has been called')
+    this.timerHandle = setInterval(() =>{
+    this.timeRemaining--
+    myPet.age++
+    console.log(myPet.age)
+    
+    }, 1000)
+    
+    
+  },
+  created(){
+    if(this.timeRemaining <= 0){
+      console.log('you loose')
+    }
+
+  }
+  
 }
-startTimer(){
-  console.log('this.startTimer has been called')
 
-}
-
-
+ 
 
 
 $('.btn').on('click', (e) => {
-  const $clicked = $(event.target)
+  
+
   
   if($clicked.hasClass('feed')) {
-   
-    console.log(this.hunger)
+
+    myPet.feeder();
+    // this.hunger--
+    // console.log("you clicked feed")
+    // console.log(this.hunger)
   } else if($clicked.hasClass('lights')) {
+    this.sleepiness--
+    // console.log(this.sleepiness)
     console.log("you clicked lights")
   } else if($clicked.hasClass('play')) {
+    this.boredom--
+    // console.log(this.boredom)
     console.log('you clicked play')
   }
+  
 
 })
 
 
 $('.button').on('click', (e) => {
-  const $clicked = $(event.target)
+  game.startTimer()
   const name = $('#tom-name').val();
-  // console.log(this.name)
+
+  $('.tom-name').replaceWith(name + "'s")
+  $('.tom-name').css({
+    "font-size": "20px",
+    "font-weight": "900"
+  })
+  console.log(name)
   //$('body').text(name)
+
 })
