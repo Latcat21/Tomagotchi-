@@ -1,4 +1,15 @@
+/*
+age is not displaying
 
+creat fucnion
+
+pet dying / ending game
+
+
+
+
+
+*/
 
 class Tomagotchi {
   constructor(name){
@@ -23,7 +34,7 @@ class Tomagotchi {
   }
 
   fatigue(){
-    this.sleepinesss--
+    this.sleepiness--
     $('.sleepiness').text(game.currentPet.sleepiness)
 
   }
@@ -39,12 +50,29 @@ class Tomagotchi {
    this.boredom++
    $('.boredom').text(game.currentPet.boredom)
  }
+ 
+ getBigger(){
+   $('.pet-dog').css({
+     'height': '125px',
+     'width': '125px',
+     'maring-top': '60%'
+   })
+   
+ }
+ 
+ getOlder(){
+   this.age++
+  $('.age').text(game.currentPet.age)
+  console.log(game.currentPet.age)
+
+ }
+
  getDead(){
    this.alive = false;
    $('.pet-dog').css({
      'background-color': 'red',
    })
-   clearInterval(this.timerHandle)
+   clearInterval(game.timerHandle)
  }
 
 }
@@ -60,11 +88,10 @@ const game = {
  startTimer(){
     const myPet = new Tomagotchi()
     this.currentPet = myPet
-    console.log('this.startTimer has been called')
+    
     
     // jq -- update screem
-    $('.age').text(game.currentPet.age)
-    console.log(game.currentPet.age)
+    
     
     this.timerHandle = setInterval(() =>{
       // this.timeRemaining--
@@ -79,11 +106,15 @@ const game = {
       if(timeOneSecond % 4000 === 0){
         game.currentPet.getBored();
       }
-      if(timeOneSecond % 3 === 0){
-        game.currentPet.age++
+      
+      if(timeOneSecond % 3000 === 0){
+        game.currentPet.getOlder()
       }
-      if(game.currentPet.hunger > 10 || game.currentPet.boredom > 10 || game.currentPet.sleepinesss > 10){
-        game.currentPet.getDead()
+      if(timeOneSecond  % 5000 === 0){
+       game.currentPet.getBigger()
+      }
+      if(game.currentPet.hunger >= 10 || game.currentPet.boredom >= 10 || game.currentPet.sleepinesss >= 10){
+       game.currentPet.getDead()
       }
       
 }, 1000)
@@ -98,13 +129,12 @@ const game = {
     game.currentPet.feeder();
     } if($clicked.hasClass('lights')) {
      game.currentPet.fatigue()
+     console.log('you clicked lights')
     } if($clicked.hasClass('play')) {
      game.currentPet.happiness()
     
   }
 })
-
-
 $('.button').on('click', (e) => {
   const name = $('#tom-name').val();
   game.currentPet = true;
