@@ -82,15 +82,17 @@ const game = {
     console.log(game.currentPet.age)
     $('.hunger').text(game.currentPet.hunger)
     console.log(game.currentPet.hunger)
+    $('.boredom').text(game.currentPet.boredom)
+    console.log(game.currentPet.boredom)
+    $('.sleepiness').text(game.currentPet.sleepiness)
     
     
-    
-    this.timerHandle = setInterval(() =>{
+    const gameTimer =  this.timerHandle = setInterval(() =>{
       // this.timeRemaining--
       this.timer++
       //console.log(this.timer)
       game.currentPet.age++
-      console.log(game.currentPet.age)
+      //console.log(game.currentPet.age)
     
     }, 1000)
     
@@ -100,24 +102,21 @@ const game = {
  $('.btn').on('click', (e) => {
   const $clicked = $(event.target)
   
-  if($clicked.hasClass('feed')) {
-    myPet.feeder();
+    if($clicked.hasClass('feed')) {
+    game.currentPet.feeder();
     console.log("you clicked feed")
-    console.log(myPet.hunger)
-    // this.hunger--
-    // console.log("you clicked feed")
-    // console.log(this.hunger)
-  } else if($clicked.hasClass('lights')) {
-    myPet.fatigue()
-    // console.log(this.sleepiness)
+    console.log(game.currentPet.hunger)
+  
+  } if($clicked.hasClass('lights')) {
+     game.currentPet.fatigue()
+    console.log(game.currentPet.sleepiness)
     console.log("you clicked lights")
-  } else if($clicked.hasClass('play')) {
-    myPet.happiness()
-    // console.log(this.boredom)
+  } if($clicked.hasClass('play')) {
+    game.currentPet.happiness()
+    console.log(game.currentPet.boredom)
     console.log('you clicked play')
   }
   
-
 })
 
 
@@ -125,15 +124,8 @@ $('.button').on('click', (e) => {
   const name = $('#tom-name').val();
   game.startTimer()
   $('.tom-name').replaceWith(name + "'s")
-  
-  
   console.log(name)
-  //$('body').text(name)
-
+  
 })
 
-//$('.age').val(game.currentPet.age)
-//console.log(myPet.age)
-//  $('.boredom').text(game.currentPet.boredom)
 
-//  $('.sleepiness').replaceWith(game.currentPet.age)
