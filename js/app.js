@@ -40,7 +40,7 @@ can't find mistake..
 
 */
 
-class tomagotchi {
+class Tomagotchi {
   constructor(name){
     this.hunger = 10;
     this.name = name;
@@ -50,72 +50,69 @@ class tomagotchi {
     this.age = 0
   }
   feeder(){
-    if($clicked.hasClass('feed')){
-      console.log('you clicked feed')
-    }
-     
-    
-
+    this.hunger++
+    //jq
   }
 
   happiness(){
-
+    this.happiness++
   }
 
   fatigue(){
-
+    this.fatigue++
   }
 }
 
 
-const myPet = new tomagotchi()
 
 const game = {
   created: false,
   timerHandle: null,
-  timeRemaining: 3,
+  //timeRemaining: 3,
   currentPet: null,
   timer: 0,
-
-  startTimer(){
+  
+ startTimer(){
+    const myPet = new Tomagotchi()
+    this.currentPet = myPet
     console.log('this.startTimer has been called')
+    
+    // jq -- update screem
+    $('.age').val(game.currentPet.age)
+    console.log(game.currentPet.age)
+    $('.hunger').text(game.currentPet.hunger)
+    console.log(game.currentPet.hunger)
+    
+    
+    
     this.timerHandle = setInterval(() =>{
-    this.timeRemaining--
-    myPet.age++
-    console.log(myPet.age)
+      // this.timeRemaining--
+      this.timer++
+      //console.log(this.timer)
+      game.currentPet.age++
+      console.log(game.currentPet.age)
     
     }, 1000)
     
-    
-  },
-  created(){
-    if(this.timeRemaining <= 0){
-      console.log('you loose')
-    }
-
-  }
-  
+},
 }
 
- 
-
-
-$('.btn').on('click', (e) => {
-  
-
+ $('.btn').on('click', (e) => {
+  const $clicked = $(event.target)
   
   if($clicked.hasClass('feed')) {
-
     myPet.feeder();
+    console.log("you clicked feed")
+    console.log(myPet.hunger)
     // this.hunger--
     // console.log("you clicked feed")
     // console.log(this.hunger)
   } else if($clicked.hasClass('lights')) {
-    this.sleepiness--
+    myPet.fatigue()
     // console.log(this.sleepiness)
     console.log("you clicked lights")
   } else if($clicked.hasClass('play')) {
-    this.boredom--
+    myPet.happiness()
     // console.log(this.boredom)
     console.log('you clicked play')
   }
@@ -125,15 +122,18 @@ $('.btn').on('click', (e) => {
 
 
 $('.button').on('click', (e) => {
-  game.startTimer()
   const name = $('#tom-name').val();
-
+  game.startTimer()
   $('.tom-name').replaceWith(name + "'s")
-  $('.tom-name').css({
-    "font-size": "20px",
-    "font-weight": "900"
-  })
+  
+  
   console.log(name)
   //$('body').text(name)
 
 })
+
+//$('.age').val(game.currentPet.age)
+//console.log(myPet.age)
+//  $('.boredom').text(game.currentPet.boredom)
+
+//  $('.sleepiness').replaceWith(game.currentPet.age)
