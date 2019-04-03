@@ -1,44 +1,4 @@
-/*
 
-
-
-Instatiate your Tomagotchi
-
-Display a character of your choice on the screen to represent your pet
-
-Display the following metrics for your pet:
-
---Hunger (1-10 scale)
---Sleepiness (1-10 scale)
----Boredom (1-10 scale)
----Age
-
---Add buttons to the screen to feed your pet, turn off the lights, and play with ---your pet.
-
-Add the ability to name your pet.
-
-Style the page.
-
-Increase your pet's age every x minutes
-
-Increase your pet's Hunger, Sleepiness, and Bored metrics on an interval of your choosing.
-
-You pet should die if Hunger, Boredom, or Sleepiness hits 10.
-
-Morph your pet at certain ages.
-Animate your pet across the screen while it's alive.
-
-
-*/
-
-/*
-Questions...
-can't find mistake..
-
-
-
-
-*/
 
 class Tomagotchi {
   constructor(name){
@@ -52,14 +12,20 @@ class Tomagotchi {
   feeder(){
     this.hunger++
     //jq
-  }
+    $('.hunger').text(game.currentPet.hunger)
+    console.log(game.currentPet.hunger)
+   }
 
   happiness(){
-    this.happiness++
+    this.boredom++
+    $('.boredom').text(game.currentPet.boredom)
+    console.log(game.currentPet.boredom)
   }
 
   fatigue(){
-    this.fatigue++
+    this.sleepinesss++
+    $('.sleepiness').text(game.currentPet.sleepiness)
+
   }
 }
 
@@ -68,7 +34,6 @@ class Tomagotchi {
 const game = {
   created: false,
   timerHandle: null,
-  //timeRemaining: 3,
   currentPet: null,
   timer: 0,
   
@@ -78,25 +43,40 @@ const game = {
     console.log('this.startTimer has been called')
     
     // jq -- update screem
-    $('.age').val(game.currentPet.age)
+    $('.age').text(game.currentPet.age)
     console.log(game.currentPet.age)
-    $('.hunger').text(game.currentPet.hunger)
-    console.log(game.currentPet.hunger)
-    $('.boredom').text(game.currentPet.boredom)
-    console.log(game.currentPet.boredom)
-    $('.sleepiness').text(game.currentPet.sleepiness)
     
-    
-    const gameTimer =  this.timerHandle = setInterval(() =>{
+    this.timerHandle = setInterval(() =>{
       // this.timeRemaining--
-      this.timer++
-      //console.log(this.timer)
-      game.currentPet.age++
-      //console.log(game.currentPet.age)
+      if(timeInMillisecond % 2000){
+
+      }
+      
+     
+     
+      
+      
+}, 1000)
     
-    }, 1000)
-    
+
 },
+petAger(age){
+  if(gameTimer % 1000 === 0){
+    game.currentPet.age++
+  }
+  console.log(game.currentPet.age)
+},
+petAppetite(){
+  if(gameTimer % 1000){
+    game.currentPet.hunger--
+    console.log(game.currentPet.hunger)
+
+  }
+}
+
+
+
+
 }
 
  $('.btn').on('click', (e) => {
