@@ -55,10 +55,21 @@ class Tomagotchi {
    $('.pet-dog').css({
      'height': '125px',
      'width': '125px',
-     'maring-top': '60%'
+     'margin-bottom': '100px'
    })
    
  }
+ moveRight(){
+   $('.pet-dog').css({
+     'margin-left': "10%",
+   })
+ }
+ moveLeft(){
+   $('.pet-dog').css({
+     'margin-right': "10%",
+   })
+ }
+
  
  getOlder(){
    this.age++
@@ -103,6 +114,9 @@ const game = {
       if(timeOneSecond % 3000 === 0){
         game.currentPet.getSleepy();
       }
+      if(timeOneSecond % 3000 === 0){
+        game.currentPet.moveRight();
+      }
       if(timeOneSecond % 4000 === 0){
         game.currentPet.getBored();
       }
@@ -111,8 +125,12 @@ const game = {
         game.currentPet.getOlder()
       }
       if(timeOneSecond  % 5000 === 0){
+        game.currentPet.moveRight()
+       }
+      if(timeOneSecond  % 5000 === 0){
        game.currentPet.getBigger()
       }
+      
       if(game.currentPet.hunger >= 10 || game.currentPet.boredom >= 10 || game.currentPet.sleepinesss >= 10){
        game.currentPet.getDead()
       }
@@ -129,6 +147,7 @@ const game = {
     game.currentPet.feeder();
     } if($clicked.hasClass('lights')) {
      game.currentPet.fatigue()
+     
      console.log('you clicked lights')
     } if($clicked.hasClass('play')) {
      game.currentPet.happiness()
