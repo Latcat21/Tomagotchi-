@@ -34,15 +34,16 @@ class Tomagotchi {
   getSleepy(){
   this.sleepiness++
   $('.sleepiness').text(game.currentPet.sleepiness)
-
-}
+  }
  getBored(){
    this.boredom++
    $('.boredom').text(game.currentPet.boredom)
  }
  getDead(){
    this.alive = false;
-   prompt('your pet died')
+   $('.pet-dog').css({
+     'background-color': 'red',
+   })
    clearInterval(this.timerHandle)
  }
 
@@ -78,14 +79,14 @@ const game = {
       if(timeOneSecond % 4000 === 0){
         game.currentPet.getBored();
       }
+      if(timeOneSecond % 3 === 0){
+        game.currentPet.age++
+      }
       if(game.currentPet.hunger > 10 || game.currentPet.boredom > 10 || game.currentPet.sleepinesss > 10){
         game.currentPet.getDead()
       }
       
-
-      
-
-  }, 1000)
+}, 1000)
     
  }
 }
@@ -95,18 +96,12 @@ const game = {
   
     if($clicked.hasClass('feed')) {
     game.currentPet.feeder();
-    //console.log("you clicked feed")
-    console.log(game.currentPet.hunger)
-  
-  } if($clicked.hasClass('lights')) {
+    } if($clicked.hasClass('lights')) {
      game.currentPet.fatigue()
-    console.log(game.currentPet.sleepiness)
-    console.log("you clicked lights")
-  } if($clicked.hasClass('play')) {
-    game.currentPet.happiness()
-    console.log(game.currentPet.boredom)
-}
-  
+    } if($clicked.hasClass('play')) {
+     game.currentPet.happiness()
+    
+  }
 })
 
 
@@ -115,7 +110,6 @@ $('.button').on('click', (e) => {
   game.currentPet = true;
   game.startTimer()
   $('.tom-name').replaceWith(name + "'s")
-  
 })
 
 

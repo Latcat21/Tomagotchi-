@@ -45,7 +45,13 @@ p{
   width: 60px;
   border-radius: 35%;
 }
-
+.pet-dog{
+  width: 75px;
+  height: 75px;
+  margin-top: 70%;
+  margin-left: 50%;
+  
+}
 
 /*  SECTIONS  */
 .section {
