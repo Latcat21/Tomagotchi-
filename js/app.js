@@ -2,31 +2,50 @@
 
 class Tomagotchi {
   constructor(name){
-    this.hunger = 10;
+    this.hunger = 0;
     this.name = name;
-    this.sleepiness = 10,
-    this.boredom = 10,
+    this.sleepiness = 0,
+    this.boredom = 0,
     this.alive = true,
     this.age = 0
   }
   feeder(){
-    this.hunger++
+    this.hunger--
     //jq
     $('.hunger').text(game.currentPet.hunger)
     console.log(game.currentPet.hunger)
    }
 
   happiness(){
-    this.boredom++
+    this.boredom--
     $('.boredom').text(game.currentPet.boredom)
     console.log(game.currentPet.boredom)
   }
 
   fatigue(){
-    this.sleepinesss++
+    this.sleepinesss--
     $('.sleepiness').text(game.currentPet.sleepiness)
 
   }
+  getHungry(){
+    this.hunger++
+    $('.hunger').text(game.currentPet.hunger)
+  }
+  getSleepy(){
+  this.sleepiness++
+  $('.sleepiness').text(game.currentPet.sleepiness)
+
+}
+ getBored(){
+   this.boredom++
+   $('.boredom').text(game.currentPet.boredom)
+ }
+ getDead(){
+   this.alive = false;
+   prompt('your pet died')
+   clearInterval(this.timerHandle)
+ }
+
 }
 
 
@@ -35,7 +54,7 @@ const game = {
   created: false,
   timerHandle: null,
   currentPet: null,
-  timer: 0,
+  time: 0,
   
  startTimer(){
     const myPet = new Tomagotchi()
@@ -48,43 +67,35 @@ const game = {
     
     this.timerHandle = setInterval(() =>{
       // this.timeRemaining--
-      if(timeInMillisecond % 2000){
-
+      this.time++
+      const timeOneSecond = this.time * 1000
+      if(timeOneSecond % 2000 === 0){
+        game.currentPet.getHungry();
+      }
+      if(timeOneSecond % 3000 === 0){
+        game.currentPet.getSleepy();
+      }
+      if(timeOneSecond % 4000 === 0){
+        game.currentPet.getBored();
+      }
+      if(game.currentPet.hunger > 10 || game.currentPet.boredom > 10 || game.currentPet.sleepinesss > 10){
+        game.currentPet.getDead()
       }
       
-     
-     
+
       
-      
-}, 1000)
+
+  }, 1000)
     
-
-},
-petAger(age){
-  if(gameTimer % 1000 === 0){
-    game.currentPet.age++
-  }
-  console.log(game.currentPet.age)
-},
-petAppetite(){
-  if(gameTimer % 1000){
-    game.currentPet.hunger--
-    console.log(game.currentPet.hunger)
-
-  }
-}
-
-
-
-
+ }
 }
 
  $('.btn').on('click', (e) => {
-  const $clicked = $(event.target)
+     const $clicked = $(event.target)
   
     if($clicked.hasClass('feed')) {
     game.currentPet.feeder();
-    console.log("you clicked feed")
+    //console.log("you clicked feed")
     console.log(game.currentPet.hunger)
   
   } if($clicked.hasClass('lights')) {
@@ -94,17 +105,16 @@ petAppetite(){
   } if($clicked.hasClass('play')) {
     game.currentPet.happiness()
     console.log(game.currentPet.boredom)
-    console.log('you clicked play')
-  }
+}
   
 })
 
 
 $('.button').on('click', (e) => {
   const name = $('#tom-name').val();
+  game.currentPet = true;
   game.startTimer()
   $('.tom-name').replaceWith(name + "'s")
-  console.log(name)
   
 })
 
